@@ -15,8 +15,15 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     getAllUsers: {
       type: new GraphQLList(UserType),
+      resolve(parent, args) {
+        return userData;
+      },
+    },
+    getUser: {
+      type: new GraphQLList(UserType),
       args: { id: { type: GraphQLInt } },
       resolve(parent, args) {
+        // filter out data by id in `args`
         return userData.filter((item) => item.id == args.id);
       },
     },
